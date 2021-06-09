@@ -14,6 +14,7 @@ type RepositoryInfo struct {
 	Description     string `json:"description"`
 	StargazersCount int    `json:"stargazers_count"`
 	Language        string `json:"language"`
+	Forks           int    `json:"forks_count"`
 }
 
 type SearchResponse struct {
