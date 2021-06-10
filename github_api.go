@@ -22,6 +22,12 @@ type SearchResponse struct {
 	TotalCount int              `json:"total_count"`
 }
 
+func responseToJson(data []byte) SearchResponse {
+	var searchResult SearchResponse
+	_ = json.Unmarshal(data, &searchResult)
+	return searchResult
+}
+
 func buildQueryParams(language string) string {
 	var queryParams string
 	if language != "" {
@@ -53,8 +59,7 @@ func SearchTrendingRepositories(language string) (SearchResponse, int) {
 		log.Fatal("Invalid JSON response")
 	}
 
-	var searchResult SearchResponse
-	_ = json.Unmarshal(data, &searchResult)
+	searchResult := responseToJson(data)
 
 	return searchResult, response.StatusCode
 }
